@@ -1,9 +1,9 @@
 package gamepkg;
 
-import java.awt.Graphics;
+import java.util.ArrayList;
 
 public class Robot {
-	
+
 	final int JUMPSPEED = -15;
 	final int MOVESPEED = 5;
 	final int GROUND = 382;
@@ -14,12 +14,14 @@ public class Robot {
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
 	private boolean ducked = false;
-	
-    private static Background bg1 = StartingClass.getBg1();                
-    private static Background bg2 = StartingClass.getBg2();
+
+	private static Background bg1 = StartingClass.getBg1();
+	private static Background bg2 = StartingClass.getBg2();
 
 	private int speedX = 0;
 	private int speedY = 1;
+
+	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
 	public void update() {
 
@@ -28,15 +30,15 @@ public class Robot {
 			centerX += speedX;
 		}
 		if (speedX == 0 || speedX < 0) {
-            bg1.setSpeedX(0);
-            bg2.setSpeedX(0);
+			bg1.setSpeedX(0);
+			bg2.setSpeedX(0);
 		}
 		if (centerX <= 200 && speedX > 0) {
 			centerX += speedX;
 		}
 		if (speedX > 0 && centerX > 200) {
-            bg1.setSpeedX(-MOVESPEED);
-            bg2.setSpeedX(-MOVESPEED);
+			bg1.setSpeedX(-MOVESPEED);
+			bg2.setSpeedX(-MOVESPEED);
 		}
 
 		// Updates Y Position
@@ -75,29 +77,29 @@ public class Robot {
 			speedX = -MOVESPEED;
 		}
 	}
-	
-	public void stopRight() {
-        setMovingRight(false);
-        stop();
-    }
 
-    public void stopLeft() {
-        setMovingLeft(false);
-        stop();
-    }
+	public void stopRight() {
+		setMovingRight(false);
+		stop();
+	}
+
+	public void stopLeft() {
+		setMovingLeft(false);
+		stop();
+	}
 
 	private void stop() {
 		if (isMovingRight() == false && isMovingLeft() == false) {
-            speedX = 0;
-        }
+			speedX = 0;
+		}
 
-        if (isMovingRight() == false && isMovingLeft() == true) {
-            moveLeft();
-        }
+		if (isMovingRight() == false && isMovingLeft() == true) {
+			moveLeft();
+		}
 
-        if (isMovingRight() == true && isMovingLeft() == false) {
-            moveRight();
-        }
+		if (isMovingRight() == true && isMovingLeft() == false) {
+			moveRight();
+		}
 	}
 
 	public void jump() {
@@ -106,6 +108,11 @@ public class Robot {
 			jumped = true;
 		}
 
+	}
+
+	public void shoot() {
+		Projectile p = new Projectile(centerX + 50, centerY - 25);
+		projectiles.add(p);
 	}
 
 	public int getCenterX() {
@@ -171,6 +178,9 @@ public class Robot {
 	public void setSpeedY(int speedY) {
 		this.speedY = speedY;
 	}
-	
-	
+
+	public ArrayList<Projectile> getProjectiles() {
+		return projectiles;
+	}
+
 }
