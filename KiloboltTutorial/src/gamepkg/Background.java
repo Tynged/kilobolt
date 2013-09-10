@@ -2,8 +2,7 @@ package gamepkg;
 
 public class Background {
 	
-	private static int backgroundHeight = 2160;
-	private static int backgroundWidth = 480;
+	private static int BACKGROUND_HEIGHT = 2160;
 	private int bgX, bgY, speedX;
 
 	public Background(int x, int y) {
@@ -15,8 +14,8 @@ public class Background {
 	public void update() {
 		bgX += speedX;
 		
-		if (bgX <= -backgroundHeight) {
-			bgX += backgroundHeight * 2;
+		if (bgX <= -BACKGROUND_HEIGHT) {
+			bgX += BACKGROUND_HEIGHT * 2;
 		}
 	}
 

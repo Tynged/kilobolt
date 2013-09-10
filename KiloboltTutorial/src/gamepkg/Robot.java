@@ -30,8 +30,8 @@ public class Robot {
 			centerX += speedX;
 		}
 		if (speedX == 0 || speedX < 0) {
-			bg1.setSpeedX(0);
-			bg2.setSpeedX(0);
+			bg1.setSpeedX(-MOVESPEED / 5);
+			bg2.setSpeedX(-MOVESPEED / 5);
 		}
 		if (centerX <= 200 && speedX > 0) {
 			centerX += speedX;
